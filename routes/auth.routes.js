@@ -81,9 +81,9 @@ router.post('/login', async (req, res) => {
 
 router.get('/verify', isAuthenticated, (req, res) => {
 	if (req.payload) {
-		res.status(200).json({ message: 'Valid Token' });
+		res.status(200).json({ message: 'Valid Tolkien' });
 	} else {
-		res.status(401).json({ errorMessage: 'Invalid Token' });
+		res.status(401).json({ errorMessage: 'Invalid Tolkien' });
 	}
 });
 
