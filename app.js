@@ -5,6 +5,7 @@ const app = express();
 require('./config')(app);
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const cors = require('cors');
 const {
 	errorHandler,
 	notFoundHandler,
@@ -14,7 +15,14 @@ const {
 app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(express.json());
-
+app.use(
+	cors({
+		origin: ['http://localhost:5173', 'http://example.com'], 
+		methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+		allowedHeaders: ['Content-Type', 'Authorization'],
+		credentials: true,
+	})
+);
 
 // Requires
 const indexRoutes = require('./routes/index.routes');

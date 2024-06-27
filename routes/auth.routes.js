@@ -7,9 +7,9 @@ const uploader = require('../middleware/cloudinary.config');
 
 //Sign Up new User
 router.post('/signup', uploader.single('imageUrl'), async (req, res) => {
-	let userImage;
-	if (!req.file) {
-		userImage = '';
+	let userImage = '';
+	if (req.file) {
+		userImage = req.file.path;
 	}
 	try {
 		//Looks for an existing user
@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/verify', isAuthenticated, (req, res) => {
 	if (req.payload) {
-		res.status(200).json({ message: 'Valid Tolkien' });
+		res.status(200).json({ message: 'Valid Tolkien', user: req.payload });
 	} else {
 		res.status(401).json({ errorMessage: 'Invalid Tolkien' });
 	}
