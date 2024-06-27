@@ -9,7 +9,15 @@ const studioSchema = new Schema({
     rental_price: { type: Number, required: true },
     contact_phone: { type: Number, required: true},
     contact_email: { type: String, required: true},
-    picture: { type: String, required: true }
+    picture: { type: String, required: true },
+    schedule: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Bookings"
+      },
+      availability: {
+        type: [String],
+        enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      },
 });
 
 const Studio = model('Studios', studioSchema);
