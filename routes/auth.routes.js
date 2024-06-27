@@ -60,11 +60,11 @@ router.post('/login', async (req, res) => {
 					_id: findUser._id,
 					user: findUser.username,
 				};
-				const authToken = jwt.sign(loggedInUser, process.env.TOKEN_SECRET, {
+				const token = jwt.sign(loggedInUser, process.env.TOKEN_SECRET, {
 					algorithm: 'HS256',
 					expiresIn: '6h',
 				});
-				res.status(200).json({ message: 'Login successful!', authToken });
+				res.status(200).json({ message: 'Login successful!', token });
 			} else {
 				console.log('Wrong password'); //just for us, delete after
 				res.status(500).json({ errorMessage: 'Wrong credentials!' });
