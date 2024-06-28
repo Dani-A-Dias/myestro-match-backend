@@ -16,11 +16,11 @@ const teachersSchema = new Schema({
   price_per_session: { type: Number, default: 0 },
   schedule: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Schedules"
+    ref: "Schedules",
   },
   availability: {
-    type: [String],
-    enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Availability",
   },
 });
 
