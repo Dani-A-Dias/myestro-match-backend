@@ -15,6 +15,20 @@ const classScheduleSchema = new Schema(
       enum: ["Scheduled", "Completed"],
       default: "Scheduled",
     },
+    start_time: {
+      type: Number,
+      required: true,
+    },
+    day_of_week: {
+      type: [String],
+      enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      required: true,
+    },
+    availability: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Availability",
+      required: true,
+    },
   },
   { timestamp: true }
 );

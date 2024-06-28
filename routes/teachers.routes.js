@@ -13,7 +13,7 @@ router.post("/api/teachers", async (req, res, next) => {
 router.get("/api/teachers/:teacherId", async (req, res, next) => {
   const { teacherId } = req.params;
   try {
-    const getTeacher = await Teacher.findById(teacherId);
+    const getTeacher = await Teacher.findById(teacherId).populate('availability');
     console.log(getTeacher);
     res.status(200).json(getTeacher);
   } catch (error) {
