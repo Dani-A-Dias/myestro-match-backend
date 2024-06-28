@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
-const availabilitySchema = new Schema({
-  teacher: {
+const slotSchema = new Schema({
+  studio: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Teachers",
+    ref: "Studios",
     required: true,
   },
   day_of_week: {
@@ -26,5 +26,5 @@ const availabilitySchema = new Schema({
   },
 });
 
-const Availability = model("Availability", availabilitySchema);
+const Availability = model("Slot", slotSchema);
 module.exports = Availability;
