@@ -69,6 +69,7 @@ router.put('/api/class-schedule/:ClassScheduleId', (req, res, next) => {
 
 router.delete('/api/class-schedule/:ClassScheduleId', (req, res, next) => {
 	ClassSchedule.findByIdAndDelete(req.params.ClassScheduleId)
+
 		.then((deletedClassSchedule) => {
 			console.log('Deleted class schedule', deletedClassSchedule);
 			res
@@ -76,6 +77,19 @@ router.delete('/api/class-schedule/:ClassScheduleId', (req, res, next) => {
 				.json(
 					`Class Schedule with id ${req.params.ClassScheduleId} was deleted`
 				);
+			const availabilityId = deletedClassSchedule.availability;
+
+			if (availabilityId) {
+				return Availability.findByIdAndUpdate(availabilityId, {
+					$set: { reserved: false },
+				})
+					.then(() => {
+						console.log('Updated availability to not reserved');
+					})
+					.catch((error) => {
+						console.error('Error while updating availability', error);
+					});
+			}
 		})
 		.catch((error) => {
 			console.error('Error while deleting class schedule)', error);
