@@ -2,7 +2,7 @@ const ClassSchedule = require("../models/Classschedule.model");
 const Availability = require("../models/Availability.model");
 const Teacher = require("../models/Teachers.model");
 const router = require("express").Router();
-
+//This is being used
 router.post("/api/class-schedule", async (req, res, next) => {
   try {
     const { user, teacher, start_time, day_of_week, availability } = req.body;
@@ -25,33 +25,34 @@ router.post("/api/class-schedule", async (req, res, next) => {
     next(error);
   }
 });
-
+//This is being used
 router.get("/api/class-schedule/:scheduleId", async (req, res, next) => {
-  const { scheduleId } = req.params;
-  try {
-    const getClassSchedule = await ClassSchedule.findById(scheduleId).populate(
-      "teacher"
-    );
-    console.log(getClassSchedule);
-    res.status(200).json(getClassSchedule);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-});
-
-router.get("/api/class-schedule", async (req, res, next) => {
-  try {
-    const findAllClassSchedules = await ClassSchedule.find().populate(
-      "teacher"
-    );
-    console.log(findAllClassSchedules);
-    res.status(200).json(findAllClassSchedules);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-});
+	const { scheduleId } = req.params;
+	try {
+	  const getClassSchedule = await ClassSchedule.findById(scheduleId).populate("teacher");
+	  console.log(getClassSchedule);
+	  res.status(200).json(getClassSchedule);
+	} catch (error) {
+	  console.log(error);
+	  next(error);
+	}
+  });
+  
+  
+  router.get("/api/class-schedule", async (req, res, next) => {
+	const { userId } = req.query; 
+	try {
+	  const query = userId ? { user: userId } : {}; 
+	  const findAllClassSchedules = await ClassSchedule.find(query).populate("teacher");
+	  console.log(findAllClassSchedules);
+	  res.status(200).json(findAllClassSchedules);
+	} catch (error) {
+	  console.log(error);
+	  next(error);
+	}
+  });
+  
+  module.exports = router;
 
 router.put("/api/class-schedule/:ClassScheduleId", (req, res, next) => {
   ClassSchedule.findByIdAndUpdate(req.params.ClassScheduleId, req.body, {
