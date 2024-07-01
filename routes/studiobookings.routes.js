@@ -5,7 +5,19 @@ const Slot = require("../models/Slot.model");
 
 router.post("/api/studio-booking", async (req, res, next) => {
   try {
-    const createStudioBooking = await StudioBooking.create(req.body);
+    const { user, studio, start_time, day_of_week, slot } = req.body;
+    const createStudioBooking = await StudioBooking.create({
+      user,
+      studio,
+      start_time,
+      day_of_week,
+      slot,
+    });
+
+    await Slot.findByIdAndUpdate(slot, {
+      $set: { reserved: true },
+    });
+
     res.status(201).json(createStudioBooking);
   } catch (error) {
     console.log(error);
