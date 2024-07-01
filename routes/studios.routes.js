@@ -13,7 +13,7 @@ router.post("/api/studios", async (req, res, next) => {
 router.get("/api/studios/:studioId", async (req, res) => {
   const { studioId } = req.params;
   try {
-    const foundStudio = await Studios.findById(studioId);
+    const foundStudio = await Studios.findById(studioId).populate("slot");
     if (foundStudio) {
       res.status(200).json({ message: "Studio found", foundStudio });
     } else {
