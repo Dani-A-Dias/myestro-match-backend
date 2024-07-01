@@ -12,7 +12,7 @@ const classScheduleSchema = new Schema(
     date: Date,
     status: {
       type: String,
-      enum: ["Scheduled", "Completed"],
+      enum: ["Scheduled", "Completed", "Canceled"],
       default: "Scheduled",
     },
     start_time: {

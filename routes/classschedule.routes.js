@@ -67,6 +67,7 @@ router.put("/api/class-schedule/:ClassScheduleId", (req, res, next) => {
     });
 });
 
+//This is being used
 router.delete('/api/class-schedule/:ClassScheduleId', (req, res, next) => {
 	ClassSchedule.findByIdAndDelete(req.params.ClassScheduleId)
 
@@ -95,7 +96,7 @@ router.delete('/api/class-schedule/:ClassScheduleId', (req, res, next) => {
 			console.error('Error while deleting class schedule)', error);
 		});
 });
-
+//This is being used
 router.post("/api/availability", async (req, res, next) => {
   try {
     const createAvailability = await Availability.create(req.body);
