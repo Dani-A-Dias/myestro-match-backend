@@ -2,7 +2,7 @@ const ClassSchedule = require('../models/Classschedule.model');
 const Availability = require('../models/Availability.model');
 const Teacher = require('../models/Teachers.model');
 const router = require('express').Router();
-//This is being used
+//Create new schedules
 router.post('/api/class-schedule', async (req, res, next) => {
 	try {
 		const { user, teacher, start_time, day_of_week, availability } = req.body;
@@ -25,7 +25,7 @@ router.post('/api/class-schedule', async (req, res, next) => {
 		next(error);
 	}
 });
-//This is being used
+//Gets individual schedule
 router.get('/api/class-schedule/:scheduleId', async (req, res, next) => {
 	const { scheduleId } = req.params;
 	try {
@@ -39,7 +39,7 @@ router.get('/api/class-schedule/:scheduleId', async (req, res, next) => {
 		next(error);
 	}
 });
-
+//Gets all schedules
 router.get('/api/class-schedule', async (req, res, next) => {
 	const { userId } = req.query;
 	try {
@@ -54,6 +54,7 @@ router.get('/api/class-schedule', async (req, res, next) => {
 		next(error);
 	}
 });
+//Updates schedule dates and changes old and new availabilities
 router.put('/api/class-schedule/:ClassScheduleId', async (req, res, next) => {
 	const { ClassScheduleId } = req.params;
 	const { start_time, day_of_week, availability: newAvailabilityId } = req.body;
@@ -80,7 +81,7 @@ router.put('/api/class-schedule/:ClassScheduleId', async (req, res, next) => {
 		next(error);
 	}
 });
-
+//Good for updating only status, changes only current availability
 router.patch('/api/class-schedule/:ClassScheduleId', async (req, res, next) => {
 	const { ClassScheduleId } = req.params;
 	try {
@@ -106,7 +107,7 @@ router.patch('/api/class-schedule/:ClassScheduleId', async (req, res, next) => {
 	}
 });
 
-//This is being used
+//Deletes a schedule
 router.delete('/api/class-schedule/:ClassScheduleId', (req, res, next) => {
 	ClassSchedule.findByIdAndDelete(req.params.ClassScheduleId)
 
@@ -135,7 +136,7 @@ router.delete('/api/class-schedule/:ClassScheduleId', (req, res, next) => {
 			console.error('Error while deleting class schedule)', error);
 		});
 });
-//This is being used
+//Creates availabilities
 router.post('/api/availability', async (req, res, next) => {
 	try {
 		const createAvailability = await Availability.create(req.body);
@@ -151,7 +152,7 @@ router.post('/api/availability', async (req, res, next) => {
 		next(error);
 	}
 });
-
+//Gets availabilities from each teacher
 router.get('/api/availability/:teacherId', async (req, res, next) => {
 	const { teacherId } = req.params;
 	try {
