@@ -14,7 +14,7 @@ const bookingSchema = new Schema(
       type: String,
       enum: ["Booked", "Completed", "Canceled"],
       default: "Booked",
-    },
+    }, 
     start_time: {
       type: Number,
       required: true,

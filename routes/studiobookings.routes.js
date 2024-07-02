@@ -114,17 +114,16 @@ router.delete('/api/studio-booking/:StudioBookingId', (req, res, next) => {
 		})
 
 		.then(() => {
-			
-			const slotId = deletedStudioBooking.slot;
+			const slotId = deletedStudioBooking.foundStudio.slot;
 
 			if (slotId) {
 				return Slot.findByIdAndUpdate(slotId, {
 					$set: { reserved: false },
 				});
 			}
-      console.log('Updated availability to not reserved');
+			console.log('Updated availability to not reserved');
 		})
-    
+
 		.catch((error) => {
 			console.error('Error while deleting studio booking)', error);
 		});
