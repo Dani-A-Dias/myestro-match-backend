@@ -8,9 +8,27 @@ const bookingSchema = new Schema(
       ref: "Studios",
       required: true,
     },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    date: { type: Date, required: true },
-    status: { type: String, enum: ["Booked", "Completed"], default: "Booked" },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required:true },
+    date: Date,
+    status: {
+      type: String,
+      enum: ["Booked", "Completed", "Canceled"],
+      default: "Booked",
+    },
+    start_time: {
+      type: Number,
+      required: true,
+    },
+    day_of_week: {
+      type: [String],
+      enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      required: true,
+    },
+    slot: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Slot",
+      required: true,
+    },
   },
   { timestamp: true }
 );

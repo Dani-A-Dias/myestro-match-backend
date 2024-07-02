@@ -40,8 +40,10 @@ router.get("/api/studio-booking/:StudioBookingId", async (req, res, next) => {
 });
 
 router.get("/api/studio-booking", async (req, res, next) => {
-  try {
-    const findAllStudioBookings = await StudioBooking.find().populate("studio");
+  const { userId } = req.query; 
+	try {
+	  const query = userId ? { user: userId } : {}; 
+    const findAllStudioBookings = await StudioBooking.find(query).populate("studio");
     console.log(findAllStudioBookings);
     res.status(200).json(findAllStudioBookings);
   } catch (error) {

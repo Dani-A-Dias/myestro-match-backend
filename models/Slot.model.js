@@ -20,11 +20,8 @@ const slotSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  reserved_by: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-const Availability = model("Slot", slotSchema);
-module.exports = Availability;
+const Slot = model("Slot", slotSchema);
+module.exports = Slot;
