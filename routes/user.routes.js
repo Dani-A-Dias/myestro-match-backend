@@ -21,14 +21,27 @@ router.get('/api/users/:id', async (req, res) => {
 
 router.patch('/api/users/:id', uploader.single('imageUrl'), async (req, res) => {
 	const { id } = req.params;
+	let userImage = '';
+
+	if (req.file) {
+		userImage = req.file.path;
+	}
 
 	try {
-		const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
+		const updateData = { ...req.body };
+
+		if (userImage) {
+			updateData.userImage = userImage;
+		}
+
+		const updatedUser = await UserModel.findByIdAndUpdate(id, updateData, {
 			new: true,
 		});
+
 		if (!updatedUser) {
 			return res.status(404).json({ message: 'User not found' });
 		}
+
 		res.status(200).json(updatedUser);
 	} catch (error) {
 		console.error('Error updating user:', error);
