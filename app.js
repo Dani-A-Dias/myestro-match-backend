@@ -10,6 +10,7 @@ const {
 	errorHandler,
 	notFoundHandler,
 } = require('./middleware/error-handling');
+const FRONTEND_URL = process.env.ORIGIN || "http://localhost:5173";
 
 //Middleware
 app.use(morgan('dev'));
@@ -17,7 +18,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(
 	cors({
-		origin: ['http://localhost:5173', 'http://example.com'], 
+		origin: [FRONTEND_URL], 
 		methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true,
