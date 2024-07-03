@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Studios = require("../models/Studios.model");
 
+// creates a new studio
 router.post("/api/studios", async (req, res, next) => {
   try {
     const createStudio = await Studios.create(req.body);
@@ -10,6 +11,7 @@ router.post("/api/studios", async (req, res, next) => {
   }
 });
 
+// fetches specific studio
 router.get("/api/studios/:studioId", async (req, res) => {
   const { studioId } = req.params;
   try {
@@ -25,6 +27,7 @@ router.get("/api/studios/:studioId", async (req, res) => {
   }
 });
 
+// fetches all studios
 router.get("/api/studios", async (req, res, next) => {
   try {
     const findAllStudios = await Studios.find();
