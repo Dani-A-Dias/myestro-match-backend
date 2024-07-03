@@ -1,4 +1,6 @@
 const Teacher = require("../models/Teachers.model");
+const Rating = require('../models/Rating.model');
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 const router = require("express").Router();
 
 router.post("/api/teachers", async (req, res, next) => {

@@ -10,7 +10,7 @@ const {
 	errorHandler,
 	notFoundHandler,
 } = require('./middleware/error-handling');
-const FRONTEND_URL = process.env.ORIGIN || "http://localhost:5173";
+const FRONTEND_URL = process.env.ORIGIN || 'http://localhost:5173';
 
 //Middleware
 app.use(morgan('dev'));
@@ -18,14 +18,14 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(
 	cors({
-		origin: [FRONTEND_URL], 
+		origin: [FRONTEND_URL],
 		methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true,
 	})
 );
 
-// Requires
+// Requires here
 const indexRoutes = require('./routes/index.routes');
 const userRoutes = require('./routes/user.routes');
 const authRoutes = require('./routes/auth.routes');
@@ -33,6 +33,7 @@ const studiosRoutes = require('./routes/studios.routes');
 const teachersRoutes = require('./routes/teachers.routes');
 const scheduleRoutes = require('./routes/classschedule.routes');
 const bookingRoutes = require('./routes/studiobookings.routes');
+const ratings = require('./routes/ratings.routes');
 
 // 👇 Routes here
 app.use('/api', indexRoutes);
@@ -42,6 +43,7 @@ app.use('/studios', studiosRoutes);
 app.use('/teachers', teachersRoutes);
 app.use('/schedule', scheduleRoutes);
 app.use('/bookings', bookingRoutes);
+app.use('/ratings', ratings);
 
 // ❗ Error Handling
 app.use(errorHandler);

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Studios = require("../models/Studios.model");
+const Rating = require('../models/Rating.model');
 
 router.post("/api/studios", async (req, res, next) => {
   try {
@@ -36,4 +37,28 @@ router.get("/api/studios", async (req, res, next) => {
   }
 });
 
+//Route to score studio
+router.post('/api/studio/:id/rate', async (req, res) => {
+  const userId = req.user._id;
+  const studioId = req.params.id;
+  const { type } = req.body;
+
+  try {
+    const existingRating = await Rating.findOne({ user: userId, studio: studioId });
+
+    if (existingRating) {
+      return res.status(400).json({ message: 'User has already rated this studio' });
+    }
+
+    const rating = new Rating({ user: userId, studio: studioId, type });
+    await rating.save();
+
+    const update = type === 'positive' ? { $inc: { positive_scoring: 1 }, $push: { ratings: rating._id } } : { $inc: { negative_scoring: 1 }, $push: { ratings: rating._id } };
+    await Studios.findByIdAndUpdate(studioId, update, { new: true });
+
+    res.status(200).json({ message: 'Rating added successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to rate studio' });
+  }
+});
 module.exports = router;
