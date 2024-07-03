@@ -12,7 +12,7 @@ const bookingSchema = new Schema(
     date: Date,
     status: {
       type: String,
-      enum: ["Booked", "Completed", "Canceled"],
+      enum: ["Booked", "Archived", "Canceled"],
       default: "Booked",
     }, 
     start_time: {
