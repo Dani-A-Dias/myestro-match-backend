@@ -2,6 +2,7 @@ const router = require('express').Router();
 const UserModel = require('../models/Users.model');
 const uploader = require('../middleware/cloudinary.config');
 
+// fetch specific user
 router.get('/api/users/:id', async (req, res) => {
 	const { id } = req.params;
 
@@ -19,6 +20,7 @@ router.get('/api/users/:id', async (req, res) => {
 	}
 });
 
+// update user profile img
 router.patch('/api/users/:id', uploader.single('imageUrl'), async (req, res) => {
 	const { id } = req.params;
 	let userImage = '';

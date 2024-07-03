@@ -1,6 +1,7 @@
 const Teacher = require("../models/Teachers.model");
 const router = require("express").Router();
 
+// creates new teacher
 router.post("/api/teachers", async (req, res, next) => {
   try {
     const createTeacher = await Teacher.create(req.body);
@@ -10,6 +11,7 @@ router.post("/api/teachers", async (req, res, next) => {
   }
 });
 
+// fetches specific teacher
 router.get("/api/teachers/:teacherId", async (req, res, next) => {
   const { teacherId } = req.params;
   try {
@@ -22,6 +24,7 @@ router.get("/api/teachers/:teacherId", async (req, res, next) => {
   }
 });
 
+// fetches all teachers 
 router.get("/api/teachers", async (req, res, next) => {
   try {
     const findAllTeachers = await Teacher.find();
