@@ -32,7 +32,7 @@ router.post('/signup', uploader.single('imageUrl'), async (req, res) => {
 			});
 			// Adds a token to the sign up so it's not necessary to login after
 			const token = jwt.sign(
-				{ userId: newUser._id, username: newUser.username },
+				{ _id: newUser._id, username: newUser.username },
 				process.env.TOKEN_SECRET,
 				{ algorithm: 'HS256', expiresIn: '6h' }
 			);
