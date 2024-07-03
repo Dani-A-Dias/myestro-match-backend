@@ -33,7 +33,10 @@ const teachersSchema = new Schema({
 		default: 0,
 		min: 0,
 	},
-  ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rating' }],
+	user_already_rated: {
+		type: [mongoose.Schema.Types.ObjectId],
+		ref: 'Users',
+	},
 });
 
 const Teacher = model('Teachers', teachersSchema);

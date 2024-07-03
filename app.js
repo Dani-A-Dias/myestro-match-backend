@@ -3,7 +3,6 @@ require('./db');
 const express = require('express');
 const app = express();
 require('./config')(app);
-const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 const {
