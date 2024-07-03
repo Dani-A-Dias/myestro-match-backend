@@ -7,7 +7,7 @@ const usersSchema = new Schema({
 	email: { type: String, required: true, unique: true },
 	phone_number: { type: String },
 	password: { type: String, required: true },
-	experience_level: { type: String, enum: ['One', 'Two', 'Three'] },
+	experience_level: { type: String, enum: ['Beginner', 'Intermediate', 'Advanced'] },
 	userImage: {
 		type: String,
 		default:
