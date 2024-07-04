@@ -30,6 +30,7 @@ const studioSchema = new Schema({
 	user_already_rated: {
 		type: [mongoose.Schema.Types.ObjectId],
 		ref: 'Users',
+		default: [],
 	},
 });
 
