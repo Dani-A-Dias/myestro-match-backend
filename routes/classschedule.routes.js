@@ -60,7 +60,7 @@ router.put('/api/class-schedule/:ClassScheduleId', async (req, res, next) => {
 	const { start_time, day_of_week, availability: newAvailabilityId } = req.body;
 
 	try {
-		const oldSchedule = ClassSchedule.findById(ClassScheduleId);
+		const oldSchedule = await ClassSchedule.findById(ClassScheduleId);
 		const oldAvailabilityId = oldSchedule.availability;
 		if (oldAvailabilityId) {
 			await Availability.findByIdAndUpdate(oldAvailabilityId, {

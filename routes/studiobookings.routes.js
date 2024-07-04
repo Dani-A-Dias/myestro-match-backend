@@ -62,7 +62,7 @@ router.put('/api/studio-booking/:StudioBookingId', async (req, res, next) => {
 	const { StudioBookingId } = req.params;
 	const { start_time, day_of_week, slot: newSlotId } = req.body;
 	try {
-		const oldSlot = StudioBooking.findById(StudioBookingId);
+		const oldSlot = await StudioBooking.findById(StudioBookingId);
 		const oldSlotId = oldSlot.slot;
 		if (oldSlotId) {
 			await Slot.findByIdAndUpdate(oldSlotId, { reserved: false });
